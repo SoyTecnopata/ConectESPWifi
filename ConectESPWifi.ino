@@ -1,38 +1,39 @@
-/*
-    This sketch sends data via HTTP GET requests to data.sparkfun.com service.
+#include <ESP8266WiFi.h> //Libreria de ESP8266 para conectar a WiFi
+#include "ThingSpeak.h" //Libreria de ThingSpeak, para comunicar con los servicios 
 
-    You need to get streamId and privateKey at data.sparkfun.com and paste them
-    below. Or just customize this script to talk to other HTTP servers.
+/*Se necesita una Red Wifi con seguridad WPA2-PSK*/
 
-*/
 
-#include <ESP8266WiFi.h>
+const char* ssid     = "LG-K200 9088"; // Nombre de la red a la que vas a conectar
+const char* password = "scandaiot"; //Contraseña de la red a la que te vas a conectar
 
-const char* ssid     = "LG-K200 9088";
-const char* password = "scandaiot";
+
+
 
 void setup() {
-  Serial.begin(9600);
-  delay(10);
 
-  // We start by connecting to a WiFi network
+  Serial.begin(9600); //Inicio de monitor Serial, !!!!Herramientas>Debug Port>"Serial"
+  delay(10); //Espera
+
+  /*Conexion a Red Wifi*/
 
   Serial.println();
   Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
+  Serial.print("Connecting to "); //Desplegado en el monitor Serial
+  Serial.println(ssid);  //Nombre de la red en la cual se va a conectar
 
-  WiFi.begin(ssid, password);
+  WiFi.begin(ssid, password); //Inicio de conexión mediante la libreria
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+  while (WiFi.status() != WL_CONNECTED) {//Revisa que no haya una conexión exitente
+    delay(500); //Espera para conectar
+    Serial.print("."); //Puntitos en el Serial
   }
 
+/*Si la conexión fue exitosa*/
   Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.println("WiFi connected"); 
+  Serial.println("IP address: "); 
+  Serial.println(WiFi.localIP()); //Muestra la dirección IP de la red WiFi a la que está conectado
 }
 
 
