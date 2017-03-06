@@ -7,8 +7,11 @@ const char* password = "scandaiot"; //Contraseña de la red a la que te vas a co
 
 
 /*Se accede a estos datos en ThingSpeak > Channels > My Channels > "Nombre del Canal" > Data Import / Export*/
-unsigned long myChannelNumber = 235719; //Channel ID [Sacado de ThingSpeak]
-const char * myWriteAPIKey = "N07LKACOYSPDTB05"; //En API Request [Sacado de ThingSpeak]
+unsigned long myChannelNumber = 237213; //Channel ID [Sacado de ThingSpeak]
+const char * myWriteAPIKey = "9L0P9JF4KKDT6G9Q"; //En API Request [Sacado de ThingSpeak]
+
+int status = WL_IDLE_STATUS;
+WiFiClient  client;
 
 
 void setup() {
@@ -16,7 +19,7 @@ void setup() {
   randomSeed(42); //Para prueba en el canal, semilla donde empieza el Random
 
   Serial.begin(9600); //Inicio de monitor Serial, !!!!Herramientas>Debug Port>"Serial"
-  delay(10); //Espera
+  delay(1000); //Espera
 
   /*Conexion a Red Wifi*/
 
@@ -25,12 +28,17 @@ void setup() {
   Serial.print("Connecting to "); //Desplegado en el monitor Serial
   Serial.println(ssid);  //Nombre de la red en la cual se va a conectar
 
-
   WiFi.begin(ssid, password); //Inicio de conexión mediante la libreria
 
-  while (WiFi.status() != WL_CONNECTED) {//Revisa que no haya una conexión exitente
+  ThingSpeak.begin(client);
+
+  while (WiFi.status() == WL_CONNECTED) {//Revisa que no haya una conexión exitente
     delay(500); //Espera para conectar
     Serial.print("."); //Puntitos en el Serial
+    status = WiFi.begin(ssid, password);
+
+    // wait 10 seconds for connection:
+    delay(10000);
   }
 
   /*Si la conexión fue exitosa*/
