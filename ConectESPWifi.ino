@@ -1,8 +1,10 @@
 #include <ESP8266WiFi.h> //Libreria de ESP8266 para conectar a WiFi
 #include <ThingSpeak.h> //Libreria de ThingSpeak, para comunicar con los servicios 
+#include <SHT1X.h>
+
 
 /*Se necesita una Red Wifi con seguridad WPA2-PSK*/
-const char* ssid     = "TVBmobile"; // Nombre de la red a la que vas a conectar
+const char* ssid     = "TVBmobile"; //Nombre de la red a la que vas a conectar
 const char* password = "scanda01"; //Contraseña de la red a la que te vas a conectar
 
 
@@ -12,6 +14,13 @@ const char * myWriteAPIKey = "9L0P9JF4KKDT6G9Q"; //En API Request [Sacado de Thi
 
 int status = WL_IDLE_STATUS;
 WiFiClient  client;
+
+//variables de temperatura
+float tempC = 0;
+float humidity = 0;
+
+//crear instancia de la libreria de SHT10
+SHT1x sht10(8, 9);
 
 
 void setup() {
@@ -62,7 +71,8 @@ void loop() {
 
   Serial.print("Valor de prueba: ");
   Serial.println(prub);
-
+  readSensor();
+  printOutTemp();
 
   /*Mandar información a ThingSpeak=TS*/
   // En cada canal de TS se pueden llenar hasta 8 campos diferentes
@@ -74,4 +84,21 @@ void loop() {
 
 
 }
-
+void readSensor()
+{
+  // Read values from the sensor
+  tempC = sht10.readTemperatureC();
+  humidity = sht10.readHumidity();
+}
+//-------------------------------------------------------------------------------------------
+void printOutTemp()
+{
+  Serial.print(" Temp = ");
+  //Serial.print(tempF);
+  //Serial.print("F, ");
+  Serial.print(tempC);
+  Serial.println("C");
+  Serial.print(" Humidity = ");
+  Serial.print(humidity);
+  Serial.println("%");
+}
