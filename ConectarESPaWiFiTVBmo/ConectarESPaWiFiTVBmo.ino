@@ -18,8 +18,8 @@ const char* password = "scanda01"; //Contraseña de la red a la que te vas a con
 
 
 /*Se accede a estos datos en ThingSpeak > Channels > My Channels > "Nombre del Canal" > Data Import / Export*/
-unsigned long myChannelNumber = 235755; //Channel ID [Sacado de ThingSpeak]
-const char * myWriteAPIKey = "K9JR50GTNW1TZ9NG"; //En API Request [Sacado de ThingSpeak]
+unsigned long myChannelNumber = 237842; //Channel ID [Sacado de ThingSpeak]
+const char * myWriteAPIKey = "I9YLJRBVDOK86VMY"; //En API Request [Sacado de ThingSpeak]
 
 int status = WL_IDLE_STATUS;
 WiFiClient  client;
