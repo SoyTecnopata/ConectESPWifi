@@ -4,13 +4,8 @@
 
 
 /*Se necesita una Red Wifi con seguridad WPA2-PSK*/
-<<<<<<< Updated upstream
 const char* ssid     = "TVBmobile"; //Nombre de la red a la que vas a conectar
 const char* password = "scanda01"; //Contraseña de la red a la que te vas a conectar
-=======
-const char* ssid     = "LG-K200 9088"; // Nombre de la red a la que vas a conectar
-const char* password = "scandaiot"; //Contraseña de la red a la que te vas a conectar
->>>>>>> Stashed changes
 
 
 /*Se accede a estos datos en ThingSpeak > Channels > My Channels > "Nombre del Canal" > Data Import / Export*/
